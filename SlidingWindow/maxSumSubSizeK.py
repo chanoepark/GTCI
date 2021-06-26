@@ -1,10 +1,16 @@
+# Fixed window size problem
 def max_sub_array_of_size_k(k, arr):
     (start, currSum, maxSum) = (0, 0, 0)
 
     for end in range(len(arr)):
+        # Increase window size by 1
         currSum += arr[end]
+
+        # Check if current window is the max
         if currSum > maxSum:
             maxSum = currSum
+        
+        # Decrease window size by 1
         if end >= k - 1:
             currSum -= arr[start]
             start += 1
