@@ -1,5 +1,6 @@
 # Dynamic window size problem
 def totalFruit(fruits):
+    # My solution
     (start, maxCount, currCount, basketMap) = (0, 0, 0, {})
     
     for end in range(len(fruits)):
@@ -34,8 +35,47 @@ def totalFruit(fruits):
     return maxCount
 
 
-print(totalFruit([1,2,1]))                  # 3
-print(totalFruit([0,1,2,2]))                # 3
-print(totalFruit([1,2,3,2,2]))              # 4
-print(totalFruit([3,3,3,1,2,1,1,2,3,3,4]))  # 5
+def totalFruitImproved(fruits):
+    # Most upvoted solution on LeetCode
+    (prev1, prev1Count, prev2, currMax, maxCount) = (-1, 0, -1, 0, 0)
+
+    for fruit in fruits:
+        if fruit == prev1 or fruit == prev2:
+            # Fruit type already in basket
+            currMax += 1
+        else:
+            # Encountered new fruit type
+            # Count will now be count of previous fruit plus 1
+            currMax = prev1Count + 1
+        
+        # Update previous fruit count
+        if fruit == prev1:
+            prev1Count += 1
+        else:
+            # Update fruit types
+            prev1Count = 1
+            prev2 = prev1
+            prev1 = fruit
+        
+        if currMax > maxCount:
+            # Update max
+            maxCount = currMax
+        
+    return maxCount
+        
+
+case1 = [1,2,1]
+case2 = [0,1,2,2]
+case3 = [1,2,3,2,2]
+case4 = [3,3,3,1,2,1,1,2,3,3,4]
+
+print(totalFruit(case1))  # 3
+print(totalFruit(case2))  # 3
+print(totalFruit(case3))  # 4
+print(totalFruit(case4))  # 5
+
+print(totalFruitImproved(case1))  # 3
+print(totalFruitImproved(case2))  # 3
+print(totalFruitImproved(case3))  # 4
+print(totalFruitImproved(case4))  # 5
 
