@@ -25,6 +25,17 @@ class Node:
         self.next = next
 
 
+def middleNodeImproved(head):
+    # Improved solution based on LC solution
+    slow = fast = head
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    
+    return slow
+
+
 def middleNode(head):
     # My solution
     # Fast & slow pointer where fast takes two steps and slow takes one step
