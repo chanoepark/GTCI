@@ -13,6 +13,16 @@ Input: nums = [1,1]
 Output: [2]
 """
 
+def allMissingNumsInPlace(nums):
+    # O(n) solution referenced from LC discussion post
+    # Mark the value that curr index points to as negative
+    # Filter the list for indices with positive values
+    for i in range(len(nums)):
+        targetIdx = abs(nums[i]) - 1
+        nums[targetIdx] = -abs(nums[targetIdx])
+    return [i + 1 for i, num in enumerate(nums) if num > 0]
+
+
 def allMissingNums(nums):
     # O(n) solution
     result = []
@@ -39,6 +49,6 @@ def allMissingNums(nums):
 case1 = [4,3,2,7,8,2,3,1]
 case2 = [1,1]
 
-print(allMissingNums(case1))
-print(allMissingNums(case2))
+print(allMissingNumsInPlace(case1))
+print(allMissingNumsInPlace(case2))
 
