@@ -28,7 +28,7 @@ class TreeNode:
 def hasPathSum(root, targetSum):
     if not root:
         return False
-    elif targetSum - root.val == 0:
+    elif root.val == targetSum and not root.left and not root.right:
         return True
     return hasPathSum(root.left, targetSum - root.val) or \
             hasPathSum(root.right, targetSum - root.val)
