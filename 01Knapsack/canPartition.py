@@ -135,12 +135,12 @@ def can_partition_memo(memo, nums, target_sum, curr_idx):
         return False
     
     # Check memo
-    if memo[curr_idx][target_sum]:
+    if memo[curr_idx][target_sum] is not None:
         return memo[curr_idx][target_sum]
     
     # Recursion: Either include or don't include the current element
-    result = can_partition_recursive(nums, target_sum - nums[curr_idx], curr_idx + 1) or \
-             can_partition_recursive(nums, target_sum, curr_idx + 1)
+    result = can_partition_memo(memo, nums, target_sum - nums[curr_idx], curr_idx + 1) or \
+             can_partition_memo(memo, nums, target_sum, curr_idx + 1)
     memo[curr_idx][target_sum] = result  # Update memo
 
     return result
